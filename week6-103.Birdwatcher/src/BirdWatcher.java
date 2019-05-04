@@ -4,23 +4,47 @@ import java.util.ArrayList;
 
 public class BirdWatcher {
     private ArrayList<Bird> birdWatcher;
-    private Bird bird;
     
     public BirdWatcher() {
         this.birdWatcher = new ArrayList<Bird>();
     }
     
     public void Add(Scanner s) {
-        System.out.println("Name: ");
+        System.out.print("Name: ");
         String name = s.nextLine();
-        System.out.println("LatinName: ");
+        System.out.print("Latin Name: ");
         String latinName = s.nextLine();
-        Bird bird = new Bird(name, latinName);
-        this.birdWatcher.add(bird);
+        this.birdWatcher.add(new Bird(name, latinName));
     }
+    
+    public void Observation(Scanner s) {
+        boolean found = false;
+        System.out.print("What was observed:? ");
+        String name = s.nextLine();
+        for (Bird bird : this.birdWatcher) {
+            if (bird.getBirdName().equals(name)) {
+                bird.incBirdCount();
+                found = true;
+            }
+        }
+        if (!found) {
+                System.out.println("Is not a bird!");
+            }
+    }
+    
     public void Statistics() {
         for (Bird a: this.birdWatcher) {
-            System.out.println(bird.birdName + " (" + bird.latinName + ") :" + bird.birdCount + " observations");
+            System.out.println(a);
+        }
+    }
+
+    public void Show(Scanner s) {
+        System.out.print("What? ");
+        String bird = s.nextLine();
+        for (Bird x : this.birdWatcher) {
+            if (x.getBirdName().equals(bird)) {
+                System.out.println(x);
+            }
         }
     }
     

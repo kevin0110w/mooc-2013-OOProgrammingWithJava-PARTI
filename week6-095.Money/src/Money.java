@@ -1,4 +1,5 @@
 public class Money {
+
     private final int euros;
     private final int cents;
 
@@ -13,65 +14,58 @@ public class Money {
         this.cents = cents;
     }
 
-    public int euros() {
+    public int euros(){
         return euros;
     }
 
-    public int cents() {
+    public int cents(){
         return cents;
     }
-    
-    public Money plus(Money added) {
-        Money c = new Money(this.euros()+added.euros(), this.cents()+added.cents());
-        return c;
-    }
-    
-    public boolean less(Money compared) {
-        boolean less = false;
-        if (this.euros() == compared.euros()) {
-            if (this.cents() < compared.cents()) {
-            less = true;
-        }
-        else {
-            less = false;
-        }
-        }
-        if (this.cents() == compared.cents())  {
-            if (this.euros() < compared.cents()) {
-        less = true;
-    }
-            else {
-                less = false;
-            }
-        }
-         return less;
-    }
-    
-    public Money minus(Money decremented) {
-        int thisMoney = Money(this.euros, this.cents);
-        
-        
-        if (this.euros() - decremented.euros() <= 0) {
-            c.euros = 0 - 0;
-        } else {
-            c.euros = this.euros() - decremented.euros();
-        }
-        
-        Money c = new Money(this.euros() - decremented.euros(), this.cents() - decremented.cents()) {
-            
-            }
-        }
-    
 
-    
-    @Override
     public String toString() {
         String zero = "";
-        if (cents < 10) {
+        if (cents <= 10) {
             zero = "0";
         }
 
         return euros + "." + zero + cents + "e";
     }
+    
+    public Money plus(Money added) {
+      int euros1 = this.euros + added.euros;
+        int cents1 = this.cents + added.cents;
 
+return new Money(euros1, cents1);
+    }
+    
+    public boolean less(Money compared) {
+        boolean less = true;
+        if (this.euros() > compared.euros()) {
+            less = false;
+        } else if (this.euros() == compared.euros() && this.cents() > compared.cents()) {
+            less = false;
+        }
+        return less;
+    }
+    
+    public Money minus(Money decremented) {
+        Money money = null;
+        int euros = 0;
+        int cents = this.cents() - decremented.cents();
+        if (cents < 0) {
+            euros = this.euros() - decremented.euros() - 1;
+        } else {
+            euros = this.euros() - decremented.euros();
+        }
+        
+        
+        
+        if (euros <= 0 && cents <= 0) {
+            money = new Money(0,0);
+        } else {
+            money = new Money(euros, cents);
+        }
+        return money;
+    }
 }
+  
