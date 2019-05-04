@@ -24,7 +24,7 @@ public class Money {
 
     public String toString() {
         String zero = "";
-        if (cents <= 10) {
+        if (cents < 10) {
             zero = "0";
         }
 
@@ -33,9 +33,9 @@ public class Money {
     
     public Money plus(Money added) {
       int euros1 = this.euros + added.euros;
-        int cents1 = this.cents + added.cents;
+      int cents1 = this.cents + added.cents;
 
-return new Money(euros1, cents1);
+      return new Money(euros1, cents1);
     }
     
     public boolean less(Money compared) {
@@ -50,17 +50,14 @@ return new Money(euros1, cents1);
     
     public Money minus(Money decremented) {
         Money money = null;
-        int euros = 0;
+        int euros = this.euros() - decremented.euros();
         int cents = this.cents() - decremented.cents();
         if (cents < 0) {
-            euros = this.euros() - decremented.euros() - 1;
-        } else {
-            euros = this.euros() - decremented.euros();
+            euros--;
+            cents = 100 + cents;
         }
         
-        
-        
-        if (euros <= 0 && cents <= 0) {
+        if (euros <= 0 || euros <= 0 && cents <= 0) {
             money = new Money(0,0);
         } else {
             money = new Money(euros, cents);
